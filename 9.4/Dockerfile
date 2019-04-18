@@ -1,17 +1,18 @@
-FROM texastribune/base
-MAINTAINER tech@texastribune.org
+FROM debian:buster
 
-RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+RUN apt-get update && apt-get install -y python-pip python-dev wget gnupg && rm -rf /var/lib/apt/lists/*
+
+RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
 
 ENV PG_MAJOR 9.4
 
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update && apt-get install -y \
-  curl \
   postgresql-client-$PG_MAJOR \
   --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
+#RUN pip install setuptools && pip install awscli postdoc
 RUN pip install awscli postdoc
 
 ADD . /app
