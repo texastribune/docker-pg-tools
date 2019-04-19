@@ -1,6 +1,8 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get install -y python-pip python-dev wget gnupg && rm -rf /var/lib/apt/lists/*
+RUN apt-get -qq update \
+  && apt-get -q install -y curl python-pip python-dev wget gnupg \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
 
