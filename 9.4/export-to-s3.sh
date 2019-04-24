@@ -21,5 +21,5 @@ readonly filename=/tmp/db.pgdump
 
 # plain-text:
 #phd pg_dump | gzip > ${filename}
-phd pg_dump --exclude-table=articles_changeevent --format=custom --verbose --file=${filename}
+phd pg_dump --format=custom --verbose --file=${filename}
 aws s3 mv ${filename} ${S3_TARGET}
