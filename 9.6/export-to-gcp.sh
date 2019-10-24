@@ -20,12 +20,11 @@ readonly filename=/tmp/db.pgdump
 
 if [ -v "GCP_KEY_FILE" ]
 then
-  gcloud auth activate-service-account --key-file ${GCP_KEY_FILE}
+  gcloud auth activate-service-account --key-file ${GCP_KEY_FILE} --project=${PROJECT_ID}
 else
   echo "No GCP_KEY_FILE variable...logging in manually"
   gcloud auth login
 fi
 
 # plain-text:
-gcloud config set project ${PROJECT_ID}
 gcloud sql export sql ${INSTANCE_NAME} ${GCP_TARGET} --database=${DATABASE_NAME}
