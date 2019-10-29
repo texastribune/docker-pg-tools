@@ -1,7 +1,7 @@
 APP=pg-tools
 NS=texastribune
 
-VERSIONS = 9.4 9.5 9.6
+VERSIONS = 9.4 9.5 9.6 10 11
 SCRIPTS = *.sh
 
 prepare:

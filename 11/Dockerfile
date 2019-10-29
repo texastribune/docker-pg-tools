@@ -1,0 +1,22 @@
+FROM debian:buster
+
+RUN apt-get -qq update \
+  && apt-get -q install -y curl python-pip python-dev wget gnupg \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
+
+ENV PG_MAJOR 11
+
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+
+RUN apt-get update && apt-get install -y \
+  postgresql-client-$PG_MAJOR \
+  --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+#RUN pip install setuptools && pip install awscli postdoc
+RUN pip install awscli postdoc
+
+ADD . /app
+
+ENTRYPOINT ["/bin/bash"]
