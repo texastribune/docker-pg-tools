@@ -8,7 +8,7 @@ RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key ad
 
 ENV PG_MAJOR 9.6
 
-ARG CLOUD_SDK_VERSION=268.0.0
+ARG CLOUD_SDK_VERSION=342.0.0
 ENV CLOUD_SDK_VERSION=$CLOUD_SDK_VERSION
 
 RUN apt-get update && apt-get install -y \
