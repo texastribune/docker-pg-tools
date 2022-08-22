@@ -8,7 +8,13 @@ set -o allexport
 
 readonly filename=/tmp/pg.sql
 
-gcloud auth login
+if [ -v "GCP_KEY_FILE" ]
+then
+  gcloud auth activate-service-account --key-file ${GCP_KEY_FILE} --project=${PROJECT_ID}
+else
+  echo "No GCP_KEY_FILE variable...logging in manually"
+  gcloud auth login
+fi
 gsutil cp ${GCP_SOURCE} ${filename}.gz
 gunzip ${filename}.gz
 
