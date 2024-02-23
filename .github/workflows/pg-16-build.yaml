@@ -10,7 +10,10 @@ jobs:
     runs-on:
       group: ubuntu-latest
     timeout-minutes: 10
-    working-directory: ./16
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./16
 
     steps:
 
