@@ -26,11 +26,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./16
+          file: ./16/Dockerfile
           push: true
           tags: texastribune/pg-tools:pg-16
           cache-from: type=registry,ref=texastribune/public-image-cache:pg16cache
