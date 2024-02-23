@@ -7,8 +7,7 @@ jobs:
 
   PG16Image:
     name: "PG16 Image Build and Push"
-    runs-on:
-      group: ubuntu-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
       run:
