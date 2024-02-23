@@ -27,7 +27,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./Dockerfile
           push: true
           tags: texastribune/pg-tools:pg-16
           cache-from: type=registry,ref=texastribune/public-image-cache:pg16cache
