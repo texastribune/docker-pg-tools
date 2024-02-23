@@ -1,0 +1,32 @@
+name: PG Build
+
+on:
+  pull_request: #Uncomment to activate on pull request
+
+jobs:
+
+  PG16Image:
+    name: "PG16 Image Build and Push"
+    runs-on:
+      group: ubuntu-latest
+    timeout-minutes: 10
+    working-directory: ./16
+
+    steps:
+
+      # checkout
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: texastribune/pg-tools:pg-16
+          cache-from: type=registry,ref=texastribune/public-image-cache:pg16cache
+          cache-to: type=registry,ref=texastribune/public-image-cache:pg16cache,mode=max
